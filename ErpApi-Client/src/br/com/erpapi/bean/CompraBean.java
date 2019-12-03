@@ -26,7 +26,7 @@ public class CompraBean {
 	
 	public String cadastrar() {
 		try {
-			rep.cadastrar(compra);
+			service.cadastrar(compra);
 			addMensagem("Cadastrado!");
 			return "compra?faces-redirect=true"; 
 		} catch (Exception e) {

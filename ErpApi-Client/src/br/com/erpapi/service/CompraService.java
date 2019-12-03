@@ -22,10 +22,10 @@ public class CompraService {
 		//solicita a URL
 		WebResource resource = client.resource(URL);
 		//recupera o objeto vindo do service com a compra vinda da página e envia via post para o servidor.
-		ClientResponse resp = resource.type(MediaType.APPLICATION_JSON)
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON)
 				.post(ClientResponse.class, compra);
 		
-		if (resp.getStatus() != 201) throw new Exception("Erro:" + response.getStatus());
+		if (response.getStatus() != 201) throw new Exception("Erro:" + response.getStatus());
 		
 	}
 	
