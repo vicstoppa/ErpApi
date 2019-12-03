@@ -3,7 +3,7 @@ package br.com.erpapi.to;
 public class Compra {
 	
 	private int id;
-		
+	
 	private String nr;
 		
 	private int qtd;

@@ -1,5 +1,11 @@
 package br.com.erpapi.resource;
 
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -74,11 +80,23 @@ public class CompraResource {
 	@DELETE
 	public void remover(@PathParam("id") int id) {
 		try {
+			String fileName;
 			Compra compra = new Compra(); 
 			compra = dao.buscar(id);
-			//criar metodo para transformar objeto em xml ou adicionar em um de log
-			dao.excluir(id);
-			dao.commit();
+			Date now = new Date();
+			SimpleDateFormat formatDate = new SimpleDateFormat("MM-dd-yyyy-mm-ss");
+			fileName = formatDate.format(now);
+			FileOutputStream file = new FileOutputStream(new File("C:/DeletedLog/compra"+fileName+".xml"));
+			XMLEncoder encoder = new XMLEncoder(file);
+			encoder.writeObject(compra);
+			encoder.close();
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+				dao.excluir(id);
+				dao.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);

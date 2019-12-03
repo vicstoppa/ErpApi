@@ -17,20 +17,7 @@ public class CompraService {
 	
 	private Client client = Client.create();
 	
-	public void salvar(Compra compra) throws Exception{
-		//cria acesso ao web service com a URL definida 
-		WebResource resource = client.resource(URL);
-		//Chama o webservice
-		ClientResponse response = resource
-				//recebendo json
-				.type(MediaType.APPLICATION_JSON)
-				//requisição do tipo post para a api
-				.post(ClientResponse.class,compra);
-		//Valido se aconteceu algum problema no servidor		
-		if(response.getStatus() != 201) {
-			throw new Exception("Erro:" + response.getStatus());
-		}
-	}
+	
 	
 	public List<Compra> list() throws Exception{
 		WebResource resource = client.resource(URL);
