@@ -14,7 +14,6 @@ import br.com.erpapi.to.Compra;
 public class CompraBean {
 	
 	private Compra compra;
-
 	private CompraService service;
 	
 	@PostConstruct
@@ -24,16 +23,16 @@ public class CompraBean {
 	}
 	
 	
-	public String cadastrar() {
+	public void cadastrar(){
+		FacesMessage msg;
 		try {
 			service.cadastrar(compra);
-			addMensagem("Cadastrado!");
-			return "compra?faces-redirect=true"; 
-		} catch (Exception e) {
+			msg = new FacesMessage("Cadastrado");
+		}catch (Exception e) {
 			e.printStackTrace();
-			addMensagem("Erro");
-			return "compra";
+			msg = new FacesMessage("Erro");
 		}
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public List<Compra> getCompras(){
@@ -56,7 +55,7 @@ public class CompraBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
+	
 	private void addMensagem(String mensagem) {
 		FacesMessage msg = new FacesMessage(mensagem);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -71,5 +70,6 @@ public class CompraBean {
 	public void setCompra(Compra compra) {
 		this.compra = compra;
 	}
+
 
 }

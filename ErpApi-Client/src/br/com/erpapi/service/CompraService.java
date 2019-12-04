@@ -17,23 +17,26 @@ public class CompraService {
 	
 	private Client client = Client.create();
 	
-
-	public void cadastrar(Compra compra) throws Exception {
-		//solicita a URL
+	public void cadastrar(Compra compra) throws Exception{
+		//cria acesso ao web service com a URL definida 
 		WebResource resource = client.resource(URL);
-		//recupera o objeto vindo do service com a compra vinda da pÃ¡gina e envia via post para o servidor.
-		ClientResponse response = resource.type(MediaType.APPLICATION_JSON)
-				.post(ClientResponse.class, compra);
-		
-		if (response.getStatus() != 201) throw new Exception("Erro:" + response.getStatus());
-		
+		//Chama o webservice
+		ClientResponse response = resource
+				//recebendo json
+				.type(MediaType.APPLICATION_JSON)
+				//requisição do tipo post para a api
+				.post(ClientResponse.class,compra);
+		//Valido se aconteceu algum problema no servidor		
+		if(response.getStatus() != 201) {
+			throw new Exception("Erro:" + response.getStatus());
+		}
 	}
 	
 	public List<Compra> list() throws Exception{
 		WebResource resource = client.resource(URL);
 		ClientResponse response = resource
 					.accept(MediaType.APPLICATION_JSON)
-					//requisicao tipo Get
+					//requisição tipo Get
 					.get(ClientResponse.class);
 		if(response.getStatus() != 200) {
 			throw new Exception("Erro:" + response.getStatus());
@@ -43,7 +46,7 @@ public class CompraService {
 	
 	public void delete(int id) throws Exception {
 		WebResource resource = client.resource(URL)
-				//enviar para a url o id para deletar a requisicao de compra
+				//enviará para a url o id para deletar a requisicao de compra
 				.path(String.valueOf(id));
 		
 		//Efetua a delecao
@@ -54,4 +57,7 @@ public class CompraService {
 		}
 		
 	}
+	
+	
+	
 }
