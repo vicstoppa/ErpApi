@@ -13,34 +13,54 @@
 	<h:outputScript library="js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-<div class="container">
-	<h1>Lista de compras</h1>
-	<h:messages />
-	<h:dataTable styleClass="table" value="#{compraBean.compras}" var="p">
-		<h:column>
-			<f:facet name="header">Nr_ERP</f:facet>
+	
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <a
+			class="navbar-brand" href="listarCompra.xhtml">ERP-API Administração</a>
+		<button class="navbar-toggler d-lg-none" type="button"
+			data-toggle="collapse" data-target="#collapsibleNavId"
+			aria-controls="collapsibleNavId" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavId">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					href="./listarCompra.xhtml">Lista de compras</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="./adicionarCompra.xhtml">Adicionar uma compra</a></li>
+			</ul>
+		</div>
+		</nav>
+	
+	<div class="container">
+		<h1>Lista de compras</h1>
+		<h:messages />
+		<h:dataTable styleClass="table" value="#{compraBean.compras}" var="p">
+			<h:column>
+				<f:facet name="header">Nr_ERP</f:facet>
 			#{p.nr}
 		</h:column>
-		<h:column>
-			<f:facet name="header">ITEM</f:facet>
+			<h:column>
+				<f:facet name="header">ITEM</f:facet>
 			#{p.nome}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Quantity</f:facet>
+			<h:column>
+				<f:facet name="header">Quantity</f:facet>
 			#{p.qtd}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Total value</f:facet>
+			<h:column>
+				<f:facet name="header">Total value</f:facet>
 			R$ #{p.valor}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Action</f:facet>
-			<h:form styleClass="form-group">
-				<h:commandButton styleClass="btn btn-outline-danger btn-sm" action="#{compraBean.delete(p.id)}" value="delete" />
-			</h:form>
-		</h:column>
-	</h:dataTable>
-	
-</div>
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:form styleClass="form-group">
+					<h:commandButton styleClass="btn btn-outline-danger btn-sm"
+						action="#{compraBean.delete(p.id)}" value="delete" />
+				</h:form>
+			</h:column>
+		</h:dataTable>
+
+	</div>
 </h:body>
 </html>
